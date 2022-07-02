@@ -13,10 +13,10 @@ public class HotelDto {
     String description;
     String address;
     byte star;
-    List<String> photos;
     String phone;
-    byte currentScore;
+    Double currentScore;
     String email;
     CityDto city;
     boolean active;
+    UserDto manager;
 }

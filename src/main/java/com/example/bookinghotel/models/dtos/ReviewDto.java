@@ -14,7 +14,7 @@ public class ReviewDto {
     UserDto guest;
     HotelDto hotel;
     LocalDate date;
-    byte score;
+    Double score;
     String text;
     boolean active;
 }

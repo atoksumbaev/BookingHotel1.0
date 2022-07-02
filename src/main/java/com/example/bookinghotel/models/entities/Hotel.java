@@ -20,14 +20,17 @@ public class Hotel {
     String description;
     String address;
     byte star;
-    List<String> photos;
     String phone;
-    byte currentScore;
+    Double currentScore;
     String email;
     @ManyToOne
     @JoinColumn(name = "city_id")
     City city;
     boolean active;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    User manager;
+
 
 }
 

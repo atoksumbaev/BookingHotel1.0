@@ -5,22 +5,19 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
-@Table(name = "price")
+@Table(name = "image")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Price {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    float price;
-    LocalDate startDate;
-    LocalDate endDate;
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    Room room;
-    boolean active;
+public class Image {
 
+    @Id
+    @GeneratedValue
+    Long id;
+    String link;
+    int orderNum;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    Hotel hotel;
 }

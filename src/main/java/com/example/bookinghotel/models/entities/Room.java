@@ -21,7 +21,7 @@ public class Room {
     EBedType bedType;
     float square;
     boolean wifi;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "hotel_id")
     Hotel hotel;
     @Enumerated(EnumType.STRING)

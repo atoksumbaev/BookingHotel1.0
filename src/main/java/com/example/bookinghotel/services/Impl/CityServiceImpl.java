@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CityServiceImpl implements CityService {
     @Autowired
@@ -48,5 +50,20 @@ public class CityServiceImpl implements CityService {
             return new ResponseEntity<>(Message.of("City not deleted"), HttpStatus.NOT_FOUND);
 
         }
+    }
+
+    @Override
+    public CityDto findById(Long id) {
+        City city = cityDao.findById(id).orElse(null);
+        if(city != null){
+            return cityMapper.toDto(city);
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> findAll() {
+        List<City> cities = cityDao.findAllByName();
+        return ResponseEntity.ok(cityMapper.toDtoList(cities));
     }
 }

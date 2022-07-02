@@ -49,4 +49,11 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(Message.of("User not deleted"),HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public UserDto findById(Long id) {
+        User user = userDao.findById(id).orElse(null);
+        if(user != null) return userMapper.toDto(user);
+        return null;
+    }
 }

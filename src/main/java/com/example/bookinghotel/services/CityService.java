@@ -10,4 +10,8 @@ public interface CityService {
     ResponseEntity<?> update(CityDto cityDto);
 
     ResponseEntity<?> delete(CityDto cityDto);
+
+    CityDto findById(Long id);
+
+    ResponseEntity<?> findAll();
 }

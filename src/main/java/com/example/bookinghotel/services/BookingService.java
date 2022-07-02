@@ -11,7 +11,7 @@ public interface BookingService {
 
     ResponseEntity<?> delete(BookingDto bookingDto);
 
-    BookingDto findByIdSecond(Long id);
+    BookingDto findById(Long id);
 
     ResponseEntity<?> cancelBooking(BookingDto bookingDto, String comment, Long userId);
 }

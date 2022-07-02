@@ -55,8 +55,8 @@ public class AdminController {
         return cityService.delete(cityDto);
     }
     @PostMapping("/saveHotel")
-    public ResponseEntity<?> saveHotel(@RequestBody HotelDto hotelDto){
-        return hotelService.save(hotelDto);
+    public ResponseEntity<?> saveHotel(@RequestBody HotelSaveWithManager hotelSaveWithManager){
+        return hotelService.save(hotelSaveWithManager);
     }
     @PutMapping("/updateHotel")
     public ResponseEntity<?> updateHotel(@RequestBody HotelDto hotelDto){
@@ -66,10 +66,7 @@ public class AdminController {
     public ResponseEntity<?> deleteHotel(@RequestBody HotelDto hotelDto){
         return hotelService.delete(hotelDto);
     }
-    @PostMapping("/savePrice")
-    public ResponseEntity<?> savePrice(@RequestBody PriceDto priceDto){
-        return priceService.save(priceDto);
-    }
+
     @PutMapping("/updatePrice")
     public ResponseEntity<?> updatePrice(@RequestBody PriceDto priceDto){
         return priceService.update(priceDto);
@@ -95,10 +92,7 @@ public class AdminController {
     public ResponseEntity<?> deleteReview(@RequestBody ReviewDto reviewDto){
         return reviewService.delete(reviewDto);
     }
-    @PostMapping("/saveRoom")
-    public ResponseEntity<?> saveRoom(@RequestBody RoomDto roomDto){
-        return roomService.save(roomDto);
-    }
+
     @PutMapping("/updateRoom")
     public ResponseEntity<?> updateRoom(@RequestBody RoomDto roomDto){
         return roomService.update(roomDto);
