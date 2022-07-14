@@ -56,4 +56,12 @@ public class UserServiceImpl implements UserService {
         if(user != null) return userMapper.toDto(user);
         return null;
     }
+
+    @Override
+    public User findByName(String name) {
+        User user = userDao.findByNameAndActiveTrue(name);
+        return user;
+    }
+
+
 }

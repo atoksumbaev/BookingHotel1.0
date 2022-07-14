@@ -24,8 +24,8 @@ public class RatingCountScheduler {
 //                "Fixed rate task - " + System.currentTimeMillis() / 1000);
 //    }
 
-//    @Scheduled(cron = "0 0 2 * * *")
-//    public void scheduleCronTask() {
-//        hotelService.countCurrentScore();
-//    }
+    @Scheduled(cron = "0 0 2 * * *")
+    public void scheduleCronTask() {
+        hotelService.countCurrentScore();
+    }
 }

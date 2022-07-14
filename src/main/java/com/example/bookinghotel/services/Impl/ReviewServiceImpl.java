@@ -8,6 +8,7 @@ import com.example.bookinghotel.models.dtos.ReviewDto;
 import com.example.bookinghotel.models.entities.Hotel;
 import com.example.bookinghotel.models.entities.Review;
 import com.example.bookinghotel.models.response.Message;
+import com.example.bookinghotel.services.HotelService;
 import com.example.bookinghotel.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewDao reviewDao;
+    @Autowired
+    HotelService hotelService;
     private final ReviewMapper reviewMapper = ReviewMapper.INSTANCE;
     private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
 
@@ -57,8 +60,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> findAllByHotelAndActive(HotelDto hotelDto) {
-        Hotel hotel = hotelMapper.toEntity(hotelDto);
-        return reviewMapper.toDtoList(reviewDao.findAllByActiveTrueAndHotel(hotel));
+    public List<ReviewDto> findAllByHotelAndActive(Long hotelId) {
+        HotelDto hotel = hotelService.findById(hotelId);
+        return reviewMapper.toDtoList(reviewDao.findAllByActiveTrueAndHotel(hotelMapper.toEntity(hotel)));
     }
 }

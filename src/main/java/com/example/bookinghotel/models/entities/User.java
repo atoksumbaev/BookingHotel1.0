@@ -9,8 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Data
 @Table(name = "user_tb")
@@ -30,6 +29,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     ERole role;
     boolean active;
+
 }
 
 

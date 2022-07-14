@@ -1,7 +1,7 @@
 package com.example.bookinghotel.services;
 
 import com.example.bookinghotel.models.dtos.BookingDto;
-import org.springframework.http.ResponseEntity;
+import com.example.bookinghotel.models.dtos.RoomDto;import org.springframework.http.ResponseEntity;import java.util.List;
 
 public interface BookingService {
 
@@ -14,4 +14,6 @@ public interface BookingService {
     BookingDto findById(Long id);
 
     ResponseEntity<?> cancelBooking(BookingDto bookingDto, String comment, Long userId);
+
+    List<BookingDto> findAllByRoomAndActive(RoomDto roomDto);
 }

@@ -4,12 +4,15 @@ import com.example.bookinghotel.dao.PriceDao;
 import com.example.bookinghotel.mappers.PriceMapper;
 import com.example.bookinghotel.models.dtos.PriceDto;
 import com.example.bookinghotel.models.entities.Price;
+import com.example.bookinghotel.models.entities.Room;
 import com.example.bookinghotel.models.response.Message;
 import com.example.bookinghotel.services.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class PriceServiceImpl implements PriceService {
@@ -48,5 +51,11 @@ public class PriceServiceImpl implements PriceService {
         }else{
             return new ResponseEntity<>(Message.of("Price not deleted"), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    public Price findByRoom(Room room, LocalDate date) {
+        Price price = priceDao.findByRoom(room, date);
+        return price;
     }
 }

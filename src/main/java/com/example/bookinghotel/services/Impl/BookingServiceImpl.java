@@ -6,7 +6,7 @@ import com.example.bookinghotel.mappers.RoomMapper;
 import com.example.bookinghotel.mappers.UserMapper;
 import com.example.bookinghotel.models.dtos.BookHistoryDto;
 import com.example.bookinghotel.models.dtos.BookingDto;
-import com.example.bookinghotel.models.dtos.UserDto;
+import com.example.bookinghotel.models.dtos.RoomDto;import com.example.bookinghotel.models.dtos.UserDto;
 import com.example.bookinghotel.models.entities.Booking;
 
 import com.example.bookinghotel.models.enums.EStatusBooking;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Date;import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -43,6 +43,19 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingMapper.toEntity(bookingDto);
         booking.setStatusBooking(EStatusBooking.ACTIVE);
         Booking bookingSaved = bookingDao.save(booking);
+
+        BookHistoryDto bookHistory = new BookHistoryDto();
+        bookHistory.setBooking(bookingDto);
+        bookHistory.setChangeDate(LocalDate.now());
+        bookHistory.setComment("Created");
+        bookHistory.setRoom(roomMapper.toDto(bookingSaved.getRoom()));
+        bookHistory.setCheckInDate(bookingSaved.getCheckInDate());
+        bookHistory.setCheckOutDate(bookingSaved.getCheckOutDate());
+        bookHistory.setGuest(userMapper.toDto(bookingSaved.getGuest()));
+        bookHistory.setUser(bookingDto.getGuest());
+        bookHistory.setStatusBooking(bookingSaved.getStatusBooking());
+        ResponseEntity<?> savedBookingHistory = bookHistoryService.save(bookHistory);
+
         return new ResponseEntity<>(bookingSaved, HttpStatus.OK);
     }
 
@@ -108,5 +121,11 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException(ex);
         }
 
+    }
+
+    @Override
+    public List<BookingDto> findAllByRoomAndActive(RoomDto roomDto) {
+        List<Booking> bookings = bookingDao.findAllByRoomAndStatusBooking(roomMapper.toEntity(roomDto), EStatusBooking.ACTIVE);
+        return bookingMapper.toDtoList(bookings);
     }
 }

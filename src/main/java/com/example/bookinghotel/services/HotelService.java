@@ -1,9 +1,9 @@
 package com.example.bookinghotel.services;
 
 import com.example.bookinghotel.models.dtos.HotelDto;
-import org.springframework.http.ResponseEntity;
+import com.example.bookinghotel.models.enums.EBedType;import org.springframework.http.ResponseEntity;
 
-import java.util.Date;
+import java.time.LocalDate;import java.util.Date;
 import java.util.List;
 
 public interface HotelService {
@@ -16,7 +16,7 @@ public interface HotelService {
 
     ResponseEntity<?> findAllByCityAndByRating(Long cityId);
 
-    ResponseEntity<?> filter(Long cityId, Date checkInDate, Date checkOutDate, int guestsAmount);
+    ResponseEntity<?> filter(Long cityId, LocalDate checkInDate, LocalDate checkOutDate, int guestsAmount, EBedType bedType);
 
     List<HotelDto> findAll();
 
